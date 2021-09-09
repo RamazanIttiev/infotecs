@@ -95,11 +95,15 @@ const generateTbody = (table, data) => {
       }
     }
 
-    const edit = document.createElement('img');
+    // Добавляю кнопку редактирования строки
 
-    edit.src = '../public/edit.svg';
-    edit.classList.add('edit__icon');
-    row.appendChild(edit);
+    const editBtn = document.createElement('button');
+    const editImg = document.createElement('img');
+
+    editImg.src = '../public/edit.svg';
+    editBtn.classList.add('edit__btn');
+    editBtn.appendChild(editImg);
+    row.appendChild(editBtn);
   }
 };
 
