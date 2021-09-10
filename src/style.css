@@ -53,16 +53,16 @@ th {
   text-overflow: ellipsis;
 }
 
-.tbody__inputRow {
+.tbody__inputTd {
   height: 50px;  
   border-right: 1px black solid;
 }
 
-.tbody__inputRow:last-child {
+.tbody__inputTd:last-child {
   border: none;
 }
 
-.tbody__inputRow input {
+.tbody__inputTd input {
   width: 100%;
   border: none;
   height: 100%;
@@ -84,4 +84,8 @@ th {
 
 .edit__btn img {
   width: 25px;
+}
+
+.hide {
+  display: none;
 }
