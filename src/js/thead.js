@@ -20,7 +20,7 @@ const generateThead = (table, data) => {
   data.map(key => {
     if (key !== 'id') {
       const th = document.createElement('th');
-      const text = document.createTextNode(key);
+      const text = document.createTextNode(key.charAt(0).toUpperCase() + key.slice(1));
       th.appendChild(text);
       row.appendChild(th);
     }
