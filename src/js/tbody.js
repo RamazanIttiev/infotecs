@@ -38,9 +38,6 @@ const generateTbody = (table, data) => {
       if (typeof value !== 'object') {
         const text = document.createTextNode(value);
 
-        // Пофиксить вывод ключей, чтоб начинался с 0 (name)
-        cell.classList.add(keys[index]);
-
         generateCellColor();
         cell.appendChild(text);
       } else {
@@ -51,8 +48,8 @@ const generateTbody = (table, data) => {
 
         cell.innerHTML = name;
       }
+      cell.classList.add(keys[index]);
     });
-
     generateEditBtn(row);
   });
 };
