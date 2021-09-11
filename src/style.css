@@ -43,7 +43,7 @@ th {
   background-color: #ddd;
 }
 
-.tbody__row td:nth-child(3) {
+.about__col {
   width: 300px;
   display: block;
   display: -webkit-box;
