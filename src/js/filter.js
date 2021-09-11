@@ -7,6 +7,7 @@ const generateFilter = (table, data) => {
   filtered.map(key => {
     const input = document.createElement('input');
     input.placeholder = key;
+    input.classList.add('td__input');
     input.setAttribute('type', key === 'phone' ? 'number' : 'text');
 
     const cell = row.insertCell();
@@ -19,8 +20,8 @@ const generateFilter = (table, data) => {
 };
 
 const filter = input => {
-  const rows = document.querySelectorAll('.tbody__row');
-  const inputs = document.querySelectorAll('.tbody__inputTd input');
+  const rows = document.getElementsByClassName('tbody__row');
+  const inputs = document.getElementsByClassName('td__input');
 
   input.addEventListener('input', e => {
     input.setAttribute('value', e.target.value);
@@ -30,7 +31,6 @@ const filter = input => {
     const eyeColor = inputs[3].value;
 
     for (let i = 0; i < rows.length; i++) {
-      console.log(rows[i].cells[0].innerHTML);
       if (
         rows[i].cells[0].innerHTML.indexOf(name) == -1 ||
         rows[i].cells[1].innerHTML.indexOf(phone) == -1 ||
