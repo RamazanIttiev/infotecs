@@ -29,11 +29,17 @@ const generateTbody = (table, data) => {
     const row = tbody.insertRow();
     row.classList.add('tbody__row');
     const values = Object.assign(Object.values(element), []).slice(1);
+    const keys = Object.keys(element).slice(1);
 
-    values.map(value => {
+    values.map((value, index) => {
       const cell = row.insertCell();
       if (typeof value !== 'object') {
         const text = document.createTextNode(value);
+
+        // Пофиксить вывод ключей, чтоб начинался с 0 (name)
+        cell.classList.add(keys[index]);
+
+        generateCellColor();
         cell.appendChild(text);
       } else {
         const firstName = document.createTextNode(value.firstName);
@@ -47,6 +53,18 @@ const generateTbody = (table, data) => {
 
     generateEditBtn(row);
   });
+};
+
+/**
+ * Функция задает цвет соответствующий значению ячейки
+ */
+const generateCellColor = () => {
+  const eyeColor = document.getElementsByClassName('eyeColor');
+  console.log(eyeColor);
+
+  for (let i = 0; i < eyeColor.length; i++) {
+    eyeColor[i].style.color = eyeColor[i].innerText;
+  }
 };
 
 export default generateTbody;
