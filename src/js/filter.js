@@ -10,6 +10,7 @@ const generateFilter = (table, data) => {
 
     const cell = row.insertCell();
     cell.classList.add('tbody__inputTd');
+    cell.classList.add(`${key}__col_input`);
 
     cell.appendChild(input);
 

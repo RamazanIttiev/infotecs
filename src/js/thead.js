@@ -20,7 +20,7 @@ const generateThead = (table, data) => {
     const th = document.createElement('th');
     const text = document.createTextNode(key.charAt(0).toUpperCase() + key.slice(1));
     th.appendChild(text);
-    th.classList.add(`${key}__head`);
+    th.classList.add(`${key}__col_head`);
     row.appendChild(th);
   });
 };

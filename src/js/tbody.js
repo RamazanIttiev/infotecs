@@ -48,7 +48,7 @@ const generateTbody = (table, data) => {
 
         cell.innerHTML = name;
       }
-      cell.classList.add(keys[index]);
+      cell.classList.add(`${keys[index]}__col`);
     });
     generateEditBtn(row);
   });
@@ -58,7 +58,7 @@ const generateTbody = (table, data) => {
  * Функция задает цвет соответствующий значению ячейки
  */
 const generateCellColor = () => {
-  const eyeColor = document.getElementsByClassName('eyeColor');
+  const eyeColor = document.getElementsByClassName('eyeColor__col');
 
   for (let i = 0; i < eyeColor.length; i++) {
     eyeColor[i].style.color = eyeColor[i].innerText;
