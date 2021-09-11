@@ -89,3 +89,8 @@ th {
 .hide {
   display: none;
 }
+
+#toggle {
+  text-align: center;
+  margin-bottom: 24px;
+}
