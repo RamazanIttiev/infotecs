@@ -2,9 +2,7 @@ const generateFilter = (table, data) => {
   const tbody = table.createTBody();
   const row = tbody.insertRow();
 
-  const filtered = data.slice(1);
-
-  filtered.map(key => {
+  data.map(key => {
     const input = document.createElement('input');
     input.placeholder = key;
     input.classList.add('td__input');
@@ -25,6 +23,8 @@ const filter = input => {
 
   input.addEventListener('input', e => {
     input.setAttribute('value', e.target.value);
+
+    // Прописать болле локаничным способом
     const name = inputs[0].value;
     const phone = inputs[1].value;
     const about = inputs[2].value;

@@ -60,7 +60,6 @@ const generateTbody = (table, data) => {
  */
 const generateCellColor = () => {
   const eyeColor = document.getElementsByClassName('eyeColor');
-  console.log(eyeColor);
 
   for (let i = 0; i < eyeColor.length; i++) {
     eyeColor[i].style.color = eyeColor[i].innerText;
