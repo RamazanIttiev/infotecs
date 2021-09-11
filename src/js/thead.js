@@ -1,7 +1,7 @@
 /**
  *
  * @param {*} table Наша таблица прописанная в html файле
- * @param {*} data Ключи объектов в массиве данных (let data = Object.keys(people[0]))
+ * @param {*} data Ключи объектов в массиве данных (const data = Object.keys(people[0]))
  *
  * Функция рендерит шапку таблицы
  *
@@ -10,20 +10,18 @@
  *
  * создают теги thead и tr
  *
- * Далее циклом пробегаюсь по массиву ключей и проверяю, является ли элемент 'id',
- * если нет то записываю элементы в тег th
+ * Далее циклом пробегаюсь по массиву ключей и записываю элементы в тег th
  */
 const generateThead = (table, data) => {
   const thead = table.createTHead();
   const row = thead.insertRow();
 
   data.map(key => {
-    if (key !== 'id') {
-      const th = document.createElement('th');
-      const text = document.createTextNode(key.charAt(0).toUpperCase() + key.slice(1));
-      th.appendChild(text);
-      row.appendChild(th);
-    }
+    const th = document.createElement('th');
+    const text = document.createTextNode(key.charAt(0).toUpperCase() + key.slice(1));
+    th.appendChild(text);
+    th.classList.add(`${key}__head`);
+    row.appendChild(th);
   });
 };
 
