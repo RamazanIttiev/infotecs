@@ -30,7 +30,7 @@ const generateTbody = (table, data) => {
     row.setAttribute('id', person.id);
     row.classList.add('tbody__row');
 
-    const values = Object.assign(Object.values(person), []).slice(1);
+    const values = Object.values(person, []).slice(1);
     const keys = Object.keys(person).slice(1);
 
     values.map((value, index) => {

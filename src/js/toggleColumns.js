@@ -1,4 +1,4 @@
-const toggleColumns = data => {
+const toggleColumns = () => {
   const checkboxes = document.getElementsByClassName('checkbox');
 
   for (let i = 0; i < checkboxes.length; i++) {
@@ -7,7 +7,6 @@ const toggleColumns = data => {
 
       if (checkboxes[i].value === 'hide') {
         for (let z = 0; z < peopleTd.length; z++) {
-          console.log(peopleTd[z]);
           peopleTd[z].classList.add('hide');
         }
         document.getElementsByClassName(`${e.target.id}_head`)[0].classList.add('hide');
@@ -15,7 +14,6 @@ const toggleColumns = data => {
         checkboxes[i].value = 'show';
       } else {
         for (let z = 0; z < peopleTd.length; z++) {
-          console.log(peopleTd[z]);
           peopleTd[z].classList.remove('hide');
         }
         document.getElementsByClassName(`${e.target.id}_head`)[0].classList.remove('hide');
