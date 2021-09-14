@@ -12,8 +12,8 @@
  *
  * Далее циклом пробегаюсь по массиву ключей и записываю элементы в тег th
  */
-const generateThead = (table, data) => {
-  const thead = table.createTHead();
+const generateThead = data => {
+  const thead = document.getElementById('thead');
   const row = thead.insertRow();
 
   data.map(key => {

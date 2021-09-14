@@ -1,6 +1,6 @@
-const generateFilter = (table, data) => {
-  const tbody = table.createTBody();
-  const row = tbody.insertRow();
+const generateFilter = data => {
+  const filter = document.getElementById('filter');
+  const row = filter.insertRow();
 
   data.map(key => {
     const input = document.createElement('input');
@@ -14,11 +14,11 @@ const generateFilter = (table, data) => {
 
     cell.appendChild(input);
 
-    filter(input);
+    setFilter(input);
   });
 };
 
-const filter = input => {
+const setFilter = input => {
   const rows = document.getElementsByClassName('tbody__row');
   const inputs = document.getElementsByClassName('td__input');
 
