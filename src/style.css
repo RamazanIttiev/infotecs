@@ -3,6 +3,10 @@ body {
   box-sizing: border-box;
 }
 
+main {
+  padding: 20px;
+}
+
 table {
   width: 50%;
   margin: 0 auto;
@@ -26,8 +30,19 @@ th {
   color: white;
 }
 
+th:first-child {
+  border-top-left-radius: 8px;
+}
+th:last-child {
+  border-top-right-radius: 8px;
+}
+
 .tbody__row {
   position: relative;
+}
+.tbody__row:last-child {
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
 }
 
 .tbody__row td {
@@ -79,6 +94,7 @@ th {
   border: none;
   outline: none;
   top: 50%;
+  right: -5%;
   transform: translate(50%, -50%);
 }
 
@@ -93,4 +109,28 @@ th {
 #toggle {
   text-align: center;
   margin-bottom: 24px;
+}
+
+#pagination {
+  display: flex;
+  justify-content: space-evenly;
+  max-width: 250px;
+  margin: 50px auto 0;
+}
+
+.pageBtn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ccc;
+  border: none;
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+}
+
+.activePage {
+  background: red
 }

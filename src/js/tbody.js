@@ -1,5 +1,7 @@
 import generateEditBtn from './editBtn.js';
 
+const tbody = document.getElementById('tbody');
+
 /**
  *
  * @param {*} table Наша таблица прописанная в html файле
@@ -7,25 +9,47 @@ import generateEditBtn from './editBtn.js';
  *
  * Функция рендерит тело таблицы
  *
- * создается тег tbody (const tbody = document.createElement('tbody'))
- * и помещается в таблицу
+ * Сразу обнуляю таблицу для того чтобы во время переключения между страницами
+ * строки не добавлялись к предыдущим (старые удаляются, новые добавляются)
  *
+ * start - начальная позиция
+ * end - конечная позиция
+ * paginatedPeople - удаляем с позиции start до end и помещяем в переменную
+ */
+const generateTbody = (people, rowsPerPage, currentPage) => {
+  tbody.innerHTML = '';
+  currentPage--;
+
+  let start = rowsPerPage * currentPage;
+  let end = start + rowsPerPage;
+  let paginatedPeople = people.slice(start, end);
+
+  generatePaginatedTable(paginatedPeople);
+};
+
+/**
+ * 
+ * @param {*} paginatedPeople Разделенный постраничный список
+ * @param {*} tbody Обертка всех строк
+ * 
+ * Функция принимает массив разделенных пользователей и обертку
+ * 
  * Далее циклом прохожу по массиву и создаю строки с классом 'tbody__row',
  *
  * в переменную values помещаю копию массива всех значений каждого объекта и
  * удаляю первыц элемент (id)
  *
+ * С помощью метода Object.keys(person).slice(1); получаю ключи объекта и 
+ * удаляю первый элемент (id) после чего присваиваю каждой строке свой класс с
+ * ключем данной строки (cell.classList.add(`${keys[index]}__col`))
+
  * Дальше идет цикл, который создает ячейки и проверка на вложенные объекты
  * (имя и фамилия)
  *
  * После всего вызываю функцию отрисовки кнопки редактирования строки
  */
-const generateTbody = (table, data) => {
-  const tbody = document.createElement('tbody');
-
-  table.appendChild(tbody);
-
-  data.map(person => {
+const generatePaginatedTable = paginatedPeople => {
+  paginatedPeople.map(person => {
     const row = tbody.insertRow();
     row.setAttribute('id', person.id);
     row.classList.add('tbody__row');
@@ -46,7 +70,7 @@ const generateTbody = (table, data) => {
 
         const name = `${firstName.textContent} ${lastName.textContent}`;
 
-        cell.innerHTML = name;
+        cell.innerText = name;
       }
       cell.classList.add(`${keys[index]}__col`);
     });
