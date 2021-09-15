@@ -1,10 +1,12 @@
 const toggleColumns = () => {
   const checkboxes = document.querySelectorAll('.check_box input');
-  const tbody = document.getElementById('tbody');
+  const inputsValue = document.querySelectorAll('tbody__inputTd');
 
   for (let i = 0; i < checkboxes.length; i++) {
     checkboxes[i].addEventListener('click', e => {
-      console.log(tbody);
+      for (let i = 0; i < inputsValue.length; i++) {
+        inputsValue[i].value = '';
+      }
 
       const peopleTd = document.getElementsByClassName(e.target.id);
 

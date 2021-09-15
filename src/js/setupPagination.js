@@ -12,6 +12,8 @@ const setupPagination = (people, rowsPerPage, currentPage) => {
 };
 
 const paginationButton = (page, people, rowsPerPage, currentPage) => {
+  const inputsValue = document.querySelectorAll('tbody__inputTd');
+
   const pageBtn = document.createElement('button');
   pageBtn.classList.add('pageBtn');
 
@@ -23,6 +25,10 @@ const paginationButton = (page, people, rowsPerPage, currentPage) => {
   // переход по страницам по клику
 
   pageBtn.addEventListener('click', () => {
+    for (let i = 0; i < inputsValue.length; i++) {
+      inputsValue[i].value = '';
+    }
+
     currentPage = page;
     generateTbody(people, rowsPerPage, currentPage);
 
