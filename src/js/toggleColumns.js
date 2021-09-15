@@ -1,8 +1,11 @@
 const toggleColumns = () => {
-  const checkboxes = document.getElementsByClassName('checkbox');
+  const checkboxes = document.querySelectorAll('.check_box input');
+  const tbody = document.getElementById('tbody');
 
   for (let i = 0; i < checkboxes.length; i++) {
     checkboxes[i].addEventListener('click', e => {
+      console.log(tbody);
+
       const peopleTd = document.getElementsByClassName(e.target.id);
 
       if (checkboxes[i].value === 'hide') {

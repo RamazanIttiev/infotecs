@@ -1,3 +1,8 @@
+html {
+  background-color: #3c373e;
+  font-family: 'Roboto';
+}
+
 main {
   padding: 20px;
 }
@@ -11,46 +16,50 @@ table {
 th, td {
   padding: 0 16px;
   border: none;
-
 }
 
-tr {
-  text-align: center;
+thead tr {
+  padding-bottom: 30px;
+  border-top: none;
+  border-bottom: none !important;
+  color: #fff;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .2rem;
 }
 
 th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  background-color: #04AA6D;
-  color: white;
-}
-
-th:first-child {
-  border-top-left-radius: 8px;
-}
-th:last-child {
-  border-top-right-radius: 8px;
+  padding: 0.75rem;
 }
 
 .tbody__row {
   position: relative;
-}
-.tbody__row:last-child {
-  border-top-right-radius: 8px;
-  border-top-left-radius: 8px;
+  text-align: center;
+  transition: .3s all ease;
 }
 
 .tbody__row td {
   min-width: 150px;
   margin: 20px 0;
+  color: #777;
+  font-weight: 300;
+  font-size: 18px;
+  border: none;
+  -webkit-transition: .3s all ease;
+  -o-transition: .3s all ease;
+  transition: .3s all ease;
 }
 
-.tbody__row:nth-child(even) {
-  background-color: #f2f2f2;
+.tbody__row:nth-child(odd) {
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
-.tbody__row:hover {
-  background-color: #ddd;
+.tbody__row:hover td {
+  color: #ddd;
+}
+
+.tbody__row:hover td:first-child {
+  color: #fdd114;
 }
 
 .about__col {
@@ -64,7 +73,7 @@ th:last-child {
 }
 
 .tbody__inputTd {
-  height: 50px;  
+  height: 50px;
   border-right: 1px black solid;
 }
 
@@ -79,7 +88,8 @@ th:last-child {
   outline: none;
   padding: 0;
   font-size: 16px;
-  
+  background: transparent;
+  color: white;
 }
 
 .edit__btn {
@@ -103,7 +113,10 @@ th:last-child {
 
 #toggle {
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 64px;
+  color: #777;
+  font-weight: 300;
+  font-size: 18px;
 }
 
 #pagination {
@@ -124,8 +137,57 @@ th:last-child {
   border-radius: 50%;
   outline: none;
   cursor: pointer;
+  opacity: 0.8;
+  transition: all 0.1s ease;
+}
+
+.pageBtn:hover {
+  background: #fdd114;
+  opacity: 1
 }
 
 .activePage {
-  background: red
+  background: #fdd114;
+  opacity: 1
+}
+
+.toggle_inputs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 30%;
+  margin: 0 auto;
+}
+
+.check_box {
+  display: flex;
+  position: relative;
+}
+
+.check_box input[type="checkbox"] {
+  display: none;
+}
+
+.check_box label {
+  position: relative;
+  box-sizing: border-box;
+  cursor: pointer;
+  border: 0px solid #fdd114;
+  width: 20px;
+  height: 20px;
+  transition: all 0.1s ease;
+  z-index: 2;
+  box-shadow: 0px 0px 0px 2px #fdd114;
+  display: block;
+}
+
+.check_box span {
+  margin: 0 0 0 10px;
+  box-shadow: none;
+  border: none;
+}
+
+.check_box input[type="checkbox"]:checked~label {
+  border: 3px solid white;
+  background: #fdd114;
 }
