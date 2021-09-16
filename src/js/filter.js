@@ -1,8 +1,21 @@
-const generateFilter = data => {
+/**
+ *
+ * @param {*} personKeys Ключи массива people
+ *
+ * Функция отрисовывает фильтр
+ *
+ * Получаем обертку фильтра и добавляем строку
+ *
+ * проходимся по ключам и создаем инпуты с классом для каждого ключа и атрибутом type
+ * далее помещаем эти инпуты в созданную ячейку
+ *
+ * и вызываем функции филтрации
+ */
+const generateFilter = personKeys => {
   const filter = document.getElementById('filter');
   const row = filter.insertRow();
 
-  data.map(key => {
+  personKeys.map(key => {
     const input = document.createElement('input');
     input.placeholder = key;
     input.classList.add('td__input');
@@ -18,6 +31,14 @@ const generateFilter = data => {
   });
 };
 
+/**
+ *
+ * @param {*} input текущий инпут
+ *
+ * При вводе запускается цикл с проверкой на наличие введенных символов в тексте ячейки,
+ * если совпадения найдены то остальным элементам присваивается класс 'hide' и элементы скрываются,
+ * в обратном случае класс удаляется
+ */
 const setFilter = input => {
   const rows = document.getElementsByClassName('tbody__row');
   const inputs = document.getElementsByClassName('td__input');
