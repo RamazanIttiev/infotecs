@@ -1,5 +1,17 @@
 import generateTbody from './tbody.js';
 
+/**
+ *
+ * @param {*} people Массив с данными пользователей
+ * @param {*} rowsPerPage Количество строк на странице
+ * @param {*} currentPage Исходная страница
+ *
+ * В переменную pageCount кладу округленное в большую сторону значение
+ * всех возможных страниц
+ *
+ * С помощью цикла прохожу по страницам и вызываю функцию, которая
+ * отрисовывает кнопки пагинации
+ */
 const setupPagination = (people, rowsPerPage, currentPage) => {
   const pagination = document.getElementById('pagination');
 
@@ -11,6 +23,23 @@ const setupPagination = (people, rowsPerPage, currentPage) => {
   }
 };
 
+/**
+ *
+ * @param {*} page Текущая страница
+ * @param {*} people Массив с данными пользователей
+ * @param {*} rowsPerPage Количество строк на странице
+ * @param {*} currentPage Исходная страница
+ * @returns кнопки пагинации
+ *
+ * Сощдаю кнопку, она отрисовывается в цикле в функции setupPagination
+ *
+ * Далее, если текущая страница равна исходной, то присваиваю ей активный класс
+ *
+ * Если в полях фильтрации было введено значение, то при переключении обнуляю его
+ * (inputsValue[i].value = '')
+ *
+ * После чего исходной странице присваиваю значение текущей и задаю правильные классы
+ */
 const paginationButton = (page, people, rowsPerPage, currentPage) => {
   const inputsValue = document.querySelectorAll('tbody__inputTd');
 
@@ -28,7 +57,6 @@ const paginationButton = (page, people, rowsPerPage, currentPage) => {
     for (let i = 0; i < inputsValue.length; i++) {
       inputsValue[i].value = '';
     }
-
     currentPage = page;
     generateTbody(people, rowsPerPage, currentPage);
 
