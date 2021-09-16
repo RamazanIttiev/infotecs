@@ -99,21 +99,16 @@ th {
   border: none;
   outline: none;
   transform: translate(50%, -50%);
+  top: 50%;
+  right: -5%;
 }
 
 .table__btn img {
   width: 25px;
 }
 
-.edit__btn {
-  top: 50%;
-  right: -5%;
-}
-
-.done__btn {
+.show {
   display: block;
-  top: 50%;
-  right: -5%;
 }
 
 .hide {

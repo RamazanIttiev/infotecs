@@ -17,7 +17,7 @@ const generateEditBtn = row => {
 
   editImg.src = '../../public/edit.svg';
   doneImg.src = '../../public/checked.svg';
-  editBtn.classList.add('table__btn', 'edit__btn');
+  editBtn.classList.add('table__btn');
   doneBtn.classList.add('table__btn', 'hide');
 
   editBtn.appendChild(editImg);
@@ -42,7 +42,7 @@ const editCell = (editBtn, doneBtn) => {
     }
     editBtn.classList.add('hide');
     doneBtn.classList.remove('hide');
-    doneBtn.classList.add('done__btn');
+    doneBtn.classList.add('show');
   });
 };
 
