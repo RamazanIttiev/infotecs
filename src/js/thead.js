@@ -1,7 +1,6 @@
 /**
  *
- * @param {*} table Наша таблица прописанная в html файле
- * @param {*} data Ключи объектов в массиве данных (const data = Object.keys(people[0]))
+ * @param {*} personKeys Ключи объектов в массиве данных (const data = Object.keys(people[0]))
  *
  * Функция рендерит шапку таблицы
  *
@@ -12,11 +11,11 @@
  *
  * Далее циклом пробегаюсь по массиву ключей и записываю элементы в тег th
  */
-const generateThead = data => {
+const generateThead = personKeys => {
   const thead = document.getElementById('thead');
   const row = thead.insertRow();
 
-  data.map(key => {
+  personKeys.map(key => {
     const th = document.createElement('th');
     const text = document.createTextNode(key.charAt(0).toUpperCase() + key.slice(1));
     th.appendChild(text);

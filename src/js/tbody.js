@@ -4,8 +4,9 @@ const tbody = document.getElementById('tbody');
 
 /**
  *
- * @param {*} table Наша таблица прописанная в html файле
- * @param {*} data Массив с данными пользователей
+ * @param {*} people Массив пользователей
+ * @param {*} rowsPerPage Количество строк на странице
+ * @param {*} currentPage Исходная страница
  *
  * Функция рендерит тело таблицы
  *
@@ -30,7 +31,6 @@ const generateTbody = (people, rowsPerPage, currentPage) => {
 /**
  * 
  * @param {*} paginatedPeople Разделенный постраничный список
- * @param {*} tbody Обертка всех строк
  * 
  * Функция принимает массив разделенных пользователей и обертку
  * 

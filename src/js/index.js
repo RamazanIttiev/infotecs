@@ -5,13 +5,13 @@ import toggleColumns from './toggleColumns.js';
 import generateTbody from './tbody.js';
 import setupPagination from './setupPagination.js';
 
-const data = Object.keys(people[0]).slice(1);
+const personKeys = Object.keys(people[0]).slice(1);
 
 let currentPage = 1;
 let rowsPerPage = 10;
 
-generateThead(data);
-generateFilter(data);
+generateThead(personKeys);
+generateFilter(personKeys);
 generateTbody(people, rowsPerPage, currentPage);
 setupPagination(people, rowsPerPage, currentPage);
 toggleColumns();
