@@ -41,7 +41,7 @@ const setupPagination = (people, rowsPerPage, currentPage) => {
  * После чего исходной странице присваиваю значение текущей и задаю правильные классы
  */
 const paginationButton = (page, people, rowsPerPage, currentPage) => {
-  const inputsValue = document.querySelectorAll('tbody__inputTd');
+  const inputsValue = document.querySelectorAll('.tbody__inputTd input');
 
   const pageBtn = document.createElement('button');
   pageBtn.classList.add('pageBtn');
