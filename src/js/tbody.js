@@ -1,4 +1,4 @@
-import generateEditBtn from './editBtn.js';
+import generateEditBtn from './editCell.js';
 import generateCellColor from './setColor.js';
 
 const tbody = document.getElementById('tbody');
