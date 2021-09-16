@@ -14,7 +14,6 @@ table {
 }
 
 th, td {
-  padding: 0 16px;
   border: none;
 }
 
@@ -40,6 +39,7 @@ th {
 .tbody__row td {
   min-width: 150px;
   max-width: 150px;
+  padding: 16px;
   margin: 20px 0;
   color: #777;
   font-weight: 300;
@@ -70,6 +70,10 @@ th {
   -webkit-box-orient: vertical;
   overflow: auto;
   text-overflow: ellipsis;
+}
+
+.tbody__row .about__col {
+  padding: 0 16px;
 }
 
 .tbody__inputTd {
