@@ -32,12 +32,15 @@ const generateEditBtn = row => {
 const editCell = (editBtn, doneBtn) => {
   editBtn.addEventListener('click', e => {
     let currentRowChildren = e.currentTarget.parentElement.children;
+    let currentRow = e.currentTarget.parentElement;
+
     for (let i = 0; i < currentRowChildren.length - 1; i++) {
       if (currentRowChildren[i].tagName !== 'BUTTON') {
         currentRowChildren[i].setAttribute('contentEditable', true);
+        currentRow.classList.add('edit__border');
       }
       if (currentRowChildren[i].className === 'about__col') {
-        currentRowChildren[i].style.display = 'block';
+        currentRowChildren[i].style.minHeight = '250px';
       }
     }
     editBtn.classList.add('hide');
@@ -49,12 +52,16 @@ const editCell = (editBtn, doneBtn) => {
 const submitCell = (editBtn, doneBtn) => {
   doneBtn.addEventListener('click', e => {
     let currentRowChildren = e.currentTarget.parentElement.children;
+    let currentRow = e.currentTarget.parentElement;
+
     for (let i = 0; i < currentRowChildren.length - 1; i++) {
       if (currentRowChildren[i].tagName !== 'BUTTON') {
         currentRowChildren[i].removeAttribute('contentEditable');
+        currentRowChildren[i].classList.remove('edit__border');
+        currentRow.classList.remove('edit__border');
       }
       if (currentRowChildren[i].className === 'about__col') {
-        currentRowChildren[i].style.display = '-webkit-box';
+        currentRowChildren[i].style.minHeight = 'unset';
       }
     }
     editBtn.classList.remove('hide');
