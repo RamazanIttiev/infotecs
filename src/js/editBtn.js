@@ -34,7 +34,6 @@ const editCell = (editBtn, doneBtn) => {
     let currentRowChildren = e.currentTarget.parentElement.children;
     for (let i = 0; i < currentRowChildren.length - 1; i++) {
       if (currentRowChildren[i].tagName !== 'BUTTON') {
-        console.log(currentRowChildren[i]);
         currentRowChildren[i].setAttribute('contentEditable', true);
       }
       if (currentRowChildren[i].className === 'about__col') {
