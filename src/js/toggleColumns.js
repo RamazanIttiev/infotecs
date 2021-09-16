@@ -12,30 +12,34 @@
  */
 const toggleColumns = () => {
   const checkboxes = document.querySelectorAll('.check_box input');
-  const inputsValue = document.querySelectorAll('tbody__inputTd');
+  const inputsValue = document.querySelectorAll('.tbody__inputTd input');
+  const HIDE = 'hide';
 
   for (let i = 0; i < checkboxes.length; i++) {
-    checkboxes[i].addEventListener('click', e => {
+    checkboxes[i].addEventListener('click', event => {
+      const headElems = document.getElementsByClassName(`${event.target.id}_head`)[0];
+      const inputElems = document.getElementsByClassName(`${event.target.id}_input`)[0];
+
       for (let i = 0; i < inputsValue.length; i++) {
         inputsValue[i].value = '';
       }
 
-      const peopleTd = document.getElementsByClassName(e.target.id);
+      const peopleTd = document.getElementsByClassName(event.target.id);
 
-      if (checkboxes[i].value === 'hide') {
-        for (let z = 0; z < peopleTd.length; z++) {
-          peopleTd[z].classList.add('hide');
+      if (checkboxes[i].value === HIDE) {
+        for (let i = 0; i < peopleTd.length; i++) {
+          peopleTd[i].classList.add(HIDE);
         }
-        document.getElementsByClassName(`${e.target.id}_head`)[0].classList.add('hide');
-        document.getElementsByClassName(`${e.target.id}_input`)[0].classList.add('hide');
+        headElems.classList.add(HIDE);
+        inputElems.classList.add(HIDE);
         checkboxes[i].value = 'show';
       } else {
-        for (let z = 0; z < peopleTd.length; z++) {
-          peopleTd[z].classList.remove('hide');
+        for (let i = 0; i < peopleTd.length; i++) {
+          peopleTd[i].classList.remove(HIDE);
         }
-        document.getElementsByClassName(`${e.target.id}_head`)[0].classList.remove('hide');
-        document.getElementsByClassName(`${e.target.id}_input`)[0].classList.remove('hide');
-        checkboxes[i].value = 'hide';
+        headElems.classList.remove(HIDE);
+        inputElems.classList.remove(HIDE);
+        checkboxes[i].value = HIDE;
       }
     });
   }

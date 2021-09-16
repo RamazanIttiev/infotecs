@@ -43,8 +43,8 @@ const setFilter = input => {
   const rows = document.getElementsByClassName('tbody__row');
   const inputs = document.getElementsByClassName('td__input');
 
-  input.addEventListener('input', e => {
-    input.setAttribute('value', e.target.value);
+  input.addEventListener('input', event => {
+    input.setAttribute('value', event.target.value);
 
     // Прописать болле локаничным способом
     const name = inputs[0].value;

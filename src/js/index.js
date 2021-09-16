@@ -7,11 +7,12 @@ import setupPagination from './setupPagination.js';
 
 const personKeys = Object.keys(people[0]).slice(1);
 
-let currentPage = 1;
-let rowsPerPage = 10;
+const initPagination = (currentPage, rowsPerPage) => {
+  generateThead(personKeys);
+  generateFilter(personKeys);
+  generateTbody(people, rowsPerPage, currentPage);
+  setupPagination(people, rowsPerPage, currentPage);
+  toggleColumns();
+};
 
-generateThead(personKeys);
-generateFilter(personKeys);
-generateTbody(people, rowsPerPage, currentPage);
-setupPagination(people, rowsPerPage, currentPage);
-toggleColumns();
+initPagination(1, 10);

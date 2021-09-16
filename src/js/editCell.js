@@ -15,8 +15,8 @@ const generateEditBtn = row => {
   const editImg = document.createElement('img');
   const doneImg = document.createElement('img');
 
-  editImg.src = '../../public/edit.svg';
-  doneImg.src = '../../public/checked.svg';
+  editImg.src = '../../assets/edit.svg';
+  doneImg.src = '../../assets/checked.svg';
   editBtn.classList.add('table__btn');
   doneBtn.classList.add('table__btn', 'hide');
 
@@ -25,14 +25,9 @@ const generateEditBtn = row => {
   row.appendChild(editBtn);
   row.appendChild(doneBtn);
 
-  editCell(editBtn, doneBtn);
-  submitCell(editBtn, doneBtn);
-};
-
-const editCell = (editBtn, doneBtn) => {
-  editBtn.addEventListener('click', e => {
-    let currentRowChildren = e.currentTarget.parentElement.children;
-    let currentRow = e.currentTarget.parentElement;
+  editBtn.addEventListener('click', event => {
+    let currentRowChildren = event.currentTarget.parentElement.children;
+    let currentRow = event.currentTarget.parentElement;
 
     for (let i = 0; i < currentRowChildren.length - 1; i++) {
       if (currentRowChildren[i].tagName !== 'BUTTON') {
@@ -47,12 +42,10 @@ const editCell = (editBtn, doneBtn) => {
     doneBtn.classList.remove('hide');
     doneBtn.classList.add('show');
   });
-};
 
-const submitCell = (editBtn, doneBtn) => {
-  doneBtn.addEventListener('click', e => {
-    let currentRowChildren = e.currentTarget.parentElement.children;
-    let currentRow = e.currentTarget.parentElement;
+  doneBtn.addEventListener('click', event => {
+    let currentRowChildren = event.currentTarget.parentElement.children;
+    let currentRow = event.currentTarget.parentElement;
 
     for (let i = 0; i < currentRowChildren.length - 1; i++) {
       if (currentRowChildren[i].tagName !== 'BUTTON') {
