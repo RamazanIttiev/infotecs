@@ -13,6 +13,8 @@
  */
 const generateThead = personKeys => {
   const thead = document.getElementById('thead');
+  thead.innerHTML = '';
+
   const row = thead.insertRow();
 
   personKeys.map(key => {

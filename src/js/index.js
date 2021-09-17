@@ -11,7 +11,7 @@ const initPagination = (currentPage, rowsPerPage) => {
   generateThead(personKeys);
   generateFilter(personKeys);
   generateTbody(people, rowsPerPage, currentPage);
-  setupPagination(people, rowsPerPage, currentPage);
+  setupPagination(people, rowsPerPage, currentPage, personKeys);
   toggleColumns();
 };
 

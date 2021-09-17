@@ -13,6 +13,8 @@
  */
 const generateFilter = personKeys => {
   const filter = document.getElementById('filter');
+
+  filter.innerHTML = '';
   const row = filter.insertRow();
 
   personKeys.map(key => {

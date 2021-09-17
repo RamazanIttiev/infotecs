@@ -1,8 +1,6 @@
 import generateEditBtn from './editCell.js';
 import generateCellColor from './setColor.js';
 
-const tbody = document.getElementById('tbody');
-
 /**
  *
  * @param {*} people Массив пользователей
@@ -19,6 +17,8 @@ const tbody = document.getElementById('tbody');
  * paginatedPeople - удаляем с позиции start до end и помещяем в переменную
  */
 const generateTbody = (people, rowsPerPage, currentPage) => {
+  const tbody = document.getElementById('tbody');
+
   tbody.innerHTML = '';
   currentPage--;
 
