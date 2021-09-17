@@ -46,7 +46,10 @@ const generateTbody = (people, rowsPerPage, currentPage) => {
 
  * Дальше идет цикл, который создает ячейки и проверка на вложенные объекты
  * (имя и фамилия)
- *
+ *  
+ * Как отрисовались все строки, присваиваю значение строки eyeColor 
+ * как цвет последней ячейки 
+ * 
  * После всего вызываю функцию отрисовки кнопки редактирования строки
  */
 const generatePaginatedTable = paginatedPeople => {
@@ -63,7 +66,6 @@ const generatePaginatedTable = paginatedPeople => {
       if (typeof value !== 'object') {
         const text = document.createTextNode(value);
 
-        generateCellColor();
         cell.appendChild(text);
       } else {
         const firstName = document.createTextNode(value.firstName);
@@ -75,9 +77,10 @@ const generatePaginatedTable = paginatedPeople => {
       }
       cell.classList.add(`${keys[index]}__col`);
     });
-    if (tbody.innerHTML !== '') {
-      generateEditBtn(row);
-    }
+
+    generateCellColor();
+
+    generateEditBtn(row);
   });
 };
 
