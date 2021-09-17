@@ -1,3 +1,5 @@
+import generateCellColor from './setColor.js';
+
 /**
  *
  * @param {*} row Текущая строка
@@ -57,6 +59,9 @@ const generateEditBtn = row => {
         currentRowChildren[i].style.minHeight = 'unset';
       }
     }
+
+    generateCellColor();
+
     editBtn.classList.remove('hide');
     doneBtn.classList.add('hide');
   });
