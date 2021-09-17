@@ -1,4 +1,6 @@
+import generateFilter from './filter.js';
 import generateTbody from './tbody.js';
+import generateThead from './thead.js';
 
 /**
  *
@@ -12,13 +14,13 @@ import generateTbody from './tbody.js';
  * С помощью цикла прохожу по страницам и вызываю функцию, которая
  * отрисовывает кнопки пагинации
  */
-const setupPagination = (people, rowsPerPage, currentPage) => {
+const setupPagination = (people, rowsPerPage, currentPage, personKeys) => {
   const pagination = document.getElementById('pagination');
 
   let pageCount = Math.ceil(people.length / rowsPerPage);
 
   for (let i = 1; i < pageCount + 1; i++) {
-    let btn = paginationButton(i, people, rowsPerPage, currentPage);
+    let btn = paginationButton(i, people, rowsPerPage, currentPage, personKeys);
     pagination.appendChild(btn);
   }
 };
@@ -40,8 +42,9 @@ const setupPagination = (people, rowsPerPage, currentPage) => {
  *
  * После чего исходной странице присваиваю значение текущей и задаю правильные классы
  */
-const paginationButton = (page, people, rowsPerPage, currentPage) => {
+const paginationButton = (page, people, rowsPerPage, currentPage, personKeys) => {
   const inputsValue = document.querySelectorAll('.tbody__inputTd input');
+  const checkboxes = document.querySelectorAll('.check_box input');
 
   const pageBtn = document.createElement('button');
   pageBtn.classList.add('pageBtn');
@@ -57,7 +60,14 @@ const paginationButton = (page, people, rowsPerPage, currentPage) => {
     for (let i = 0; i < inputsValue.length; i++) {
       inputsValue[i].value = '';
     }
+    for (let i = 0; i < checkboxes.length; i++) {
+      checkboxes[i].checked = false;
+      checkboxes[i].value = 'hide';
+    }
+
     currentPage = page;
+    generateThead(personKeys);
+    generateFilter(personKeys);
     generateTbody(people, rowsPerPage, currentPage);
 
     let currentPageBtn = document.querySelector('#pagination button.activePage');
