@@ -79,6 +79,7 @@ th {
 .tbody__inputTd {
   height: 50px;
   border-right: 1px black solid;
+  padding: 0 16px;
 }
 
 .tbody__inputTd:last-child {
@@ -90,7 +91,6 @@ th {
   border: none;
   height: 100%;
   outline: none;
-  padding: 0 16px;
   font-size: 16px;
   background: transparent;
   color: white;
