@@ -11,13 +11,16 @@
  *
  * Далее циклом пробегаюсь по массиву ключей и записываю элементы в тег th
  */
-const generateThead = (data, tableElement) => {
+const generateThead = ({ data, hiddenColumns }, tableElement) => {
   const thead = tableElement.createTHead();
   const row = thead.insertRow();
 
   Object.keys(data[0])
     .slice(1)
     .map(key => {
+      if (hiddenColumns.includes(key)) {
+        return;
+      }
       const th = document.createElement('th');
       const text = document.createTextNode(key.charAt(0).toUpperCase() + key.slice(1));
       th.appendChild(text);
@@ -89,38 +92,38 @@ const generateRow = (rowData, hiddenColumns) => {
     .forEach(personArray => {
       let value = personArray[1];
       const key = personArray[0];
-      console.log(hiddenColumns);
+
       if (hiddenColumns.includes(key)) {
         return;
       }
       const cell = row.insertCell();
-      if (personArray[0] === 'name') {
+      if (key === 'name') {
         const firstName = document.createTextNode(value.firstName);
         const lastName = document.createTextNode(value.lastName);
 
         value = `${firstName.textContent} ${lastName.textContent}`;
       }
-      if (personArray[0] == 'eyeColor') {
+      if (key == 'eyeColor') {
         cell.style.borderRight = `1px solid ${value}`;
       }
 
       cell.innerText = value;
-      cell.classList.add(`${personArray[0]}__col`);
-      cell.setAttribute('data-name', personArray[0]);
+      cell.classList.add(`${key}__col`);
+      cell.setAttribute('data-name', key);
     });
 
   return row;
 };
 
-export const updateRow = (row, data) => {
-  const newRow = generateRow(data);
+export const updateRow = (row, data, hiddenColumns) => {
+  const newRow = generateRow(data, hiddenColumns);
 
   row.replaceChildren(...newRow.children);
 };
 
 export const generateTable = ({ data, currentPage, rowsPerPage, hiddenColumns }) => {
   const tableElement = document.createElement('table');
-  const thead = generateThead(data, tableElement);
+  const thead = generateThead({ data, hiddenColumns }, tableElement);
   // const filters = generateFilter(data);
   const tbody = generateTbody({ data, rowsPerPage, currentPage, hiddenColumns }, tableElement);
   // const pagination = generateRow(data, rowsPerPage, currentPage);
