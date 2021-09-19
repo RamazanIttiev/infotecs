@@ -10,39 +10,47 @@
  * Далее, если значение инпута == hide, то получаю нужные ячейки по классам и скрваю их помощью класса hide
  * если нет, то убираю класс hide
  */
-const toggleColumns = () => {
-  const checkboxes = document.querySelectorAll('.check_box input');
-  const inputsValue = document.querySelectorAll('.tbody__inputTd input');
-  const HIDE = 'hide';
+export const initToggleColumns = ({ toggleColumns, hiddenColumns }, callback) => {
+  const checkboxElements = document.querySelectorAll(`${toggleColumns.selector} .check_box`);
+  let newHiddenColumns = [...hiddenColumns];
 
-  for (let i = 0; i < checkboxes.length; i++) {
-    checkboxes[i].addEventListener('click', event => {
-      const headElems = document.getElementsByClassName(`${event.target.id}_head`)[0];
-      const inputElems = document.getElementsByClassName(`${event.target.id}_input`)[0];
+  Array.from(checkboxElements).forEach(checkboxElement => {
+    checkboxElement.addEventListener('change', () => {
+      const columnName = checkboxElement.getAttribute('data-name');
 
-      for (let i = 0; i < inputsValue.length; i++) {
-        inputsValue[i].value = '';
-      }
-
-      const peopleTd = document.getElementsByClassName(event.target.id);
-
-      if (checkboxes[i].value === HIDE) {
-        for (let i = 0; i < peopleTd.length; i++) {
-          peopleTd[i].classList.add(HIDE);
-        }
-        headElems.classList.add(HIDE);
-        inputElems.classList.add(HIDE);
-        checkboxes[i].value = 'show';
+      if (newHiddenColumns.includes(columnName)) {
+        newHiddenColumns = newHiddenColumns.filter(column => column !== columnName);
       } else {
-        for (let i = 0; i < peopleTd.length; i++) {
-          peopleTd[i].classList.remove(HIDE);
-        }
-        headElems.classList.remove(HIDE);
-        inputElems.classList.remove(HIDE);
-        checkboxes[i].value = HIDE;
+        newHiddenColumns.push(columnName);
       }
-    });
-  }
-};
 
-export default toggleColumns;
+      callback(newHiddenColumns);
+    });
+  });
+
+  // for (let i = 0; i < checkboxes.length; i++) {
+  //   checkboxes[i].
+  //     for (let i = 0; i < inputsValue.length; i++) {
+  //       inputsValue[i].value = '';
+  //     }
+
+  //     const peopleTd = document.getElementsByClassName(e.target.id);
+
+  //     if (checkboxes[i].value === 'hide') {
+  //       for (let z = 0; z < peopleTd.length; z++) {
+  //         peopleTd[z].classList.add('hide');
+  //       }
+  //       document.getElementsByClassName(`${e.target.id}_head`)[0].classList.add('hide');
+  //       document.getElementsByClassName(`${e.target.id}_input`)[0].classList.add('hide');
+  //       checkboxes[i].value = 'show';
+  //     } else {
+  //       for (let z = 0; z < peopleTd.length; z++) {
+  //         peopleTd[z].classList.remove('hide');
+  //       }
+  //       document.getElementsByClassName(`${e.target.id}_head`)[0].classList.remove('hide');
+  //       document.getElementsByClassName(`${e.target.id}_input`)[0].classList.remove('hide');
+  //       checkboxes[i].value = 'hide';
+  //     }
+  //   });
+  // }
+};

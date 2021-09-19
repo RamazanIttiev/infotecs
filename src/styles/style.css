@@ -14,6 +14,7 @@ table {
 }
 
 th, td {
+  padding: 0 16px;
   border: none;
 }
 
@@ -39,9 +40,8 @@ th {
 .tbody__row td {
   min-width: 150px;
   max-width: 150px;
-  padding: 16px;
   margin: 20px 0;
-  color: #b1b1b1;
+  color: #777;
   font-weight: 300;
   font-size: 18px;
   border: none;
@@ -72,14 +72,9 @@ th {
   text-overflow: ellipsis;
 }
 
-.tbody__row .about__col {
-  padding: 0 16px;
-}
-
 .tbody__inputTd {
   height: 50px;
   border-right: 1px black solid;
-  padding: 0 16px;
 }
 
 .tbody__inputTd:last-child {
@@ -91,6 +86,7 @@ th {
   border: none;
   height: 100%;
   outline: none;
+  padding: 0;
   font-size: 16px;
   background: transparent;
   color: white;
@@ -119,11 +115,7 @@ th {
   display: none;
 }
 
-.edit__border {
-  border: 1px dashed #fdd114;
-}
-
-#toggle {
+#toggleColumns {
   text-align: center;
   margin-bottom: 64px;
   color: #777;
