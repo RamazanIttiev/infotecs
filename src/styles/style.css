@@ -78,8 +78,8 @@ thead tr {
   border: none;
 }
 
-.filter {
-  display: table-row
+#filter {
+  margin-bottom: 50px;
 }
 
 .filter__input {

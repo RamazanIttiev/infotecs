@@ -8,7 +8,7 @@ import { initToggleColumns } from './toggleColumns.js';
 const initApp = ({ currentPage = 1, rowsPerPage = 10, data, containerElement }) => {
   const state = {
     hiddenColumns: [],
-    filteredTable: [],
+    filters: {},
     currentPage,
     rowsPerPage,
     data: [...data],
@@ -19,7 +19,7 @@ const initApp = ({ currentPage = 1, rowsPerPage = 10, data, containerElement }) 
 
   initToggleColumns(state, hiddenColumns => {
     state.hiddenColumns = hiddenColumns;
-    state.containerElement.innerHTML = '';
+    state.containerElement.querySelector('table').remove();
 
     state.containerElement.appendChild(generateTable({ ...state }));
     initEditing(state, (row, data) => {
@@ -27,18 +27,25 @@ const initApp = ({ currentPage = 1, rowsPerPage = 10, data, containerElement }) 
     });
   });
 
-  initFilters();
+  initFilters(state, data => {
+    state.filters = data;
+    state.containerElement.querySelector('table').remove();
+
+    state.containerElement.appendChild(generateTable({ ...state }));
+    initEditing(state, (row, data, hiddenColumns) => {
+      updateRow(row, data, hiddenColumns);
+    });
+  });
 
   initEditing(state, (row, data, hiddenColumns) => {
     updateRow(row, data, hiddenColumns);
   });
 
-  initPagination(state, ({ data, rowsPerPage, currentPage, hiddenColumns }) => {
-    state.containerElement.innerHTML = '';
+  initPagination(state, currentPage => {
+    state.currentPage = currentPage;
+    state.containerElement.querySelector('table').remove();
 
-    state.containerElement.appendChild(
-      generateTable({ data, rowsPerPage, currentPage, hiddenColumns }),
-    );
+    state.containerElement.appendChild(generateTable({ ...state }));
     initEditing(state, (row, data) => {
       updateRow(row, data, hiddenColumns);
     });

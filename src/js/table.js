@@ -1,5 +1,3 @@
-import { generateFilter } from './filter.js';
-
 /**
  *
  * @param {*} param0 data - Массив данных, hiddenColumns - скрытые колонки
@@ -40,18 +38,37 @@ const generateThead = ({ data, hiddenColumns }, tableElement) => {
  * currentPage-- для правильного постраничного вывода
  *
  * Далее отпределяю начальный и конечный элементы текущей страницы и удаляю ненужные
- * Прохожу циклом по новому массиву из 10 объектов и вызываю функцию отрисовки строк
+ *
+ * Если заданы фильтры (filters), то фильтрую массив данных проверяя есть ли введенное значение
+ * в ячейке, если да, то прохожу циклом по новому массиву и вызываю функцию отрисовки строк
  */
-export const generateTbody = ({ data, rowsPerPage, currentPage, hiddenColumns }, tableElement) => {
+export const generateTbody = (
+  { data, rowsPerPage, currentPage, hiddenColumns, filters },
+  tableElement,
+) => {
   const tbody = tableElement.createTBody();
 
   currentPage--;
-
   let start = rowsPerPage * currentPage;
   let end = start + rowsPerPage;
-  let paginatedData = data.slice(start, end);
 
-  paginatedData.map(rowData => {
+  let newData = data.filter(item => {
+    for (let key in filters) {
+      // item[key] - значение ячейки
+      // filters[key] - значение инпута
+
+      if (typeof item[key] !== 'object' && item[key].indexOf(filters[key]) < 0) return false;
+      if (
+        typeof item[key] === 'object' &&
+        Object.values(item[key]).join(' ').indexOf(filters[key]) < 0
+      )
+        return false;
+    }
+    return true;
+  });
+
+  newData = newData.slice(start, end);
+  newData.map(rowData => {
     tbody.appendChild(generateRow(rowData, hiddenColumns));
   });
 
@@ -123,15 +140,16 @@ export const updateRow = (row, data, hiddenColumns) => {
   row.replaceChildren(...newRow.children);
 };
 
-export const generateTable = ({ data, currentPage, rowsPerPage, hiddenColumns }) => {
+export const generateTable = ({ data, currentPage, rowsPerPage, hiddenColumns, filters }) => {
   const tableElement = document.createElement('table');
 
   const thead = generateThead({ data, hiddenColumns }, tableElement);
-  const filters = generateFilter({ data, hiddenColumns }, tableElement);
-  const tbody = generateTbody({ data, rowsPerPage, currentPage, hiddenColumns }, tableElement);
+  const tbody = generateTbody(
+    { data, rowsPerPage, currentPage, hiddenColumns, filters },
+    tableElement,
+  );
 
   tableElement.appendChild(thead);
-  tableElement.appendChild(filters);
   tableElement.appendChild(tbody);
 
   return tableElement;

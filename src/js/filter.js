@@ -7,20 +7,18 @@
  * Создаю тело аблиц и помещаю туда строку и ячейки с инпутами,
  * пройдясь по массиву ключей первого обекта
  */
-export const generateFilter = ({ data, hiddenColumns }, tableElement) => {
-  const filterElement = tableElement.createTBody();
+export const generateFilter = ({ data }) => {
+  const filterElement = document.createElement('tbody');
   const row = filterElement.insertRow();
 
   Object.keys(data[0])
     .slice(1)
     .forEach(key => {
-      if (hiddenColumns.includes(key)) {
-        return;
-      }
       const input = document.createElement('input');
       input.placeholder = key;
       input.classList.add('filter__input');
       input.setAttribute('type', key === 'phone' ? 'number' : 'text');
+      input.name = key;
 
       const cell = row.insertCell();
       cell.classList.add('filter__cell');
@@ -38,36 +36,30 @@ export const generateFilter = ({ data, hiddenColumns }, tableElement) => {
  *
  * @param {*} input текущий инпут
  *
- * При вводе запускается цикл с проверкой на наличие введенных символов в тексте ячейки,
- * если совпадения найдены то остальным элементам присваивается класс 'hide' и элементы скрываются,
- * в обратном случае класс удаляется
+ * Происходит генерация инпутов
+ *
+ * В newFilters записываю копию пустого объекта с будущими фильтрами
+ *
+ * Запускается цикл и при вводе задаю свойство объекта и присваиваю ему значение инпута
+ *
+ * Далее передаю этот объект в колбэк который отрисовывает новое тело таблицы
+ *
+ * Все это с небольшой задержкой
  */
-export const initFilters = () => {
+export const initFilters = ({ data, filters }, callback) => {
+  const filterElement = document.getElementById('filter');
+  const filter = generateFilter({ data });
+  filterElement.appendChild(filter);
+
   const filterInputs = document.getElementsByClassName('filter__input');
-  const rows = document.getElementsByClassName('tbody__row');
+
+  const newFilters = { ...filters };
 
   Array.from(filterInputs).forEach(input => {
-    input.addEventListener('input', e =>
+    input.addEventListener('input', event =>
       setTimeout(() => {
-        {
-          input.setAttribute('value', e.target.value);
-          const name = filterInputs[0].value;
-          const phone = filterInputs[1].value;
-          const about = filterInputs[2].value;
-          const eyeColor = filterInputs[3].value;
-          Array.from(rows).forEach(row => {
-            if (
-              row.cells[0].innerHTML.indexOf(name) == -1 ||
-              row.cells[1].innerHTML.indexOf(phone) == -1 ||
-              row.cells[2].innerHTML.indexOf(about) == -1 ||
-              row.cells[3].innerHTML.indexOf(eyeColor) == -1
-            ) {
-              row.classList.add('hide');
-            } else {
-              row.classList.remove('hide');
-            }
-          });
-        }
+        newFilters[event.target.name] = event.target.value;
+        callback(newFilters);
       }, 1000),
     );
   });
