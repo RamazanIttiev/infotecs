@@ -140,14 +140,11 @@ export const updateRow = (row, data, hiddenColumns) => {
   row.replaceChildren(...newRow.children);
 };
 
-export const generateTable = ({ data, currentPage, rowsPerPage, hiddenColumns, filters }) => {
+export const generateTable = state => {
   const tableElement = document.createElement('table');
 
-  const thead = generateThead({ data, hiddenColumns }, tableElement);
-  const tbody = generateTbody(
-    { data, rowsPerPage, currentPage, hiddenColumns, filters },
-    tableElement,
-  );
+  const thead = generateThead(state, tableElement);
+  const tbody = generateTbody(state, tableElement);
 
   tableElement.appendChild(thead);
   tableElement.appendChild(tbody);
