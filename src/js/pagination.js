@@ -1,4 +1,4 @@
-export const generatePagination = ({ data, rowsPerPage, currentPage, hiddenColumns }, callback) => {
+export const initPagination = ({ data, rowsPerPage, currentPage, hiddenColumns }, callback) => {
   const paginationElement = document.getElementById('pagination');
 
   let pageCount = Math.ceil(data.length / rowsPerPage);
