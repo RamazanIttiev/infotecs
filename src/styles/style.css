@@ -26,10 +26,7 @@ thead tr {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: .2rem;
-}
-
-th {
-  padding: 0.75rem;
+  text-align: left;
 }
 
 .tbody__row {
@@ -72,16 +69,20 @@ th {
   text-overflow: ellipsis;
 }
 
-.tbody__inputTd {
+.filter__cell {
   height: 50px;
   border-right: 1px black solid;
 }
 
-.tbody__inputTd:last-child {
+.filter__cell:last-child {
   border: none;
 }
 
-.tbody__inputTd input {
+.filter {
+  display: table-row
+}
+
+.filter__input {
   width: 100%;
   border: none;
   height: 100%;
@@ -90,9 +91,10 @@ th {
   font-size: 16px;
   background: transparent;
   color: white;
+  display: table-cell;
 }
 
-.table__btn {
+.edit__btn {
   position: absolute;
   cursor: pointer;
   background: transparent;
@@ -103,12 +105,8 @@ th {
   right: -5%;
 }
 
-.table__btn img {
+.edit__btn img {
   width: 25px;
-}
-
-.show {
-  display: block;
 }
 
 .hide {
