@@ -16,7 +16,7 @@ export const initPagination = ({ data, rowsPerPage, currentPage, hiddenColumns }
   let pageCount = Math.ceil(data.length / rowsPerPage);
 
   for (let i = 1; i < pageCount + 1; i++) {
-    let btn = paginationButton(i, data, rowsPerPage, currentPage, hiddenColumns, callback);
+    let btn = paginationButton(i, currentPage, callback);
     paginationElement.appendChild(btn);
   }
 
@@ -44,7 +44,7 @@ export const initPagination = ({ data, rowsPerPage, currentPage, hiddenColumns }
  *
  * И вызываем колбэк, который генерирует новую таблицу с обновленными строками
  */
-const paginationButton = (page, data, rowsPerPage, currentPage, hiddenColumns, callback) => {
+const paginationButton = (page, currentPage, callback) => {
   const checkboxes = document.querySelectorAll('.check_box input');
 
   const pageBtn = document.createElement('button');
@@ -66,7 +66,7 @@ const paginationButton = (page, data, rowsPerPage, currentPage, hiddenColumns, c
     currentPageBtn.classList.remove('activePage');
     pageBtn.classList.add('activePage');
 
-    callback({ data, rowsPerPage, currentPage, hiddenColumns });
+    callback(currentPage);
   });
 
   return pageBtn;
