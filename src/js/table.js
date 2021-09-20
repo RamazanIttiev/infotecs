@@ -1,15 +1,14 @@
+import { generateFilter } from './filter.js';
+
 /**
  *
- * @param {*} personKeys Ключи объектов в массиве данных (const data = Object.keys(people[0]))
+ * @param {*} param0 data - Массив данных, hiddenColumns - скрытые колонки
+ * @param {*} tableElement Таблица
+ * @returns шапку таблицы
  *
- * Функция рендерит шапку таблицы
+ * Прохожусь по ключам первого объекта массива и отрисовываю шапку с нужными названиями
  *
- * const thead = table.createTHead()
- * const row = thead.insertRow();
- *
- * создают теги thead и tr
- *
- * Далее циклом пробегаюсь по массиву ключей и записываю элементы в тег th
+ * key.charAt(0).toUpperCase() + key.slice(1) - делает 1 букву заглавной
  */
 const generateThead = ({ data, hiddenColumns }, tableElement) => {
   const thead = tableElement.createTHead();
@@ -33,22 +32,19 @@ const generateThead = ({ data, hiddenColumns }, tableElement) => {
 
 /**
  *
- * @param {*} people Массив пользователей
- * @param {*} rowsPerPage Количество строк на странице
- * @param {*} currentPage Исходная страница
+ * @param {*} param0 Деструктурированный объект state
+ * @param {*} tableElement Таблица
+ * @returns тело таблицы
  *
- * Функция рендерит тело таблицы
+ * Создаю тег table
+ * currentPage-- для правильного постраничного вывода
  *
- * Сразу обнуляю таблицу для того чтобы во время переключения между страницами
- * строки не добавлялись к предыдущим (старые удаляются, новые добавляются)
- *
- * start - начальная позиция
- * end - конечная позиция
- * paginatedPeople - удаляем с позиции start до end и помещяем в переменную
+ * Далее отпределяю начальный и конечный элементы текущей страницы и удаляю ненужные
+ * Прохожу циклом по новому массиву из 10 объектов и вызываю функцию отрисовки строк
  */
-const generateTbody = ({ data, rowsPerPage, currentPage, hiddenColumns }, tableElement) => {
+export const generateTbody = ({ data, rowsPerPage, currentPage, hiddenColumns }, tableElement) => {
   const tbody = tableElement.createTBody();
-  tbody.innerHTML = '';
+
   currentPage--;
 
   let start = rowsPerPage * currentPage;
@@ -64,23 +60,18 @@ const generateTbody = ({ data, rowsPerPage, currentPage, hiddenColumns }, tableE
 
 /**
  *
- * @param {*} paginatedPeople Разделенный постраничный список
+ * @param {*} rowData Строки текущей страницы (объекты)
+ * @param {*} hiddenColumns Скрытые колонки
+ * @returns Строку
  *
- * Функция принимает массив разделенных пользователей и обертку
+ * Создаю строку
  *
- * Далее циклом прохожу по массиву и создаю строки с классом 'tbody__row',
+ * Object.entries получает массив с ключами и значениями
  *
- * в переменную values помещаю копию массива всех значений каждого объекта и
- * удаляю первыц элемент (id)
+ * Далее проверяю на наличие ключа в массиве скрытых колонок, если есть совпадения,
+ * то дальше ничего не происходит
  *
- * С помощью метода Object.keys(person).slice(1); получаю ключи объекта и
- * удаляю первый элемент (id) после чего присваиваю каждой строке свой класс с
- * ключем данной строки (cell.classList.add(`${keys[index]}__col`))
-
- * Дальше идет цикл, который создает ячейки и проверка на вложенные объекты
- * (имя и фамилия)
- *
- * После всего вызываю функцию отрисовки кнопки редактирования строки
+ * В ином случае идет создание ячеек
  */
 const generateRow = (rowData, hiddenColumns) => {
   const row = document.createElement('tr');
@@ -103,7 +94,7 @@ const generateRow = (rowData, hiddenColumns) => {
 
         value = `${firstName.textContent} ${lastName.textContent}`;
       }
-      if (key == 'eyeColor') {
+      if (key === 'eyeColor') {
         cell.style.borderRight = `1px solid ${value}`;
       }
 
@@ -115,6 +106,17 @@ const generateRow = (rowData, hiddenColumns) => {
   return row;
 };
 
+/**
+ *
+ * @param {*} row Текущая строка
+ * @param {*} data Текущая строка (объект)
+ * @param {*} hiddenColumns Массив скрытых колонок
+ *
+ * Функция обновляет строку после ее редаетирования с помощью replaceChildren
+ *
+ * В newRow снова вызывается отрисовка строк, но уже с обновленными данными,
+ * а replaceChildren меняет отредактированную строку
+ */
 export const updateRow = (row, data, hiddenColumns) => {
   const newRow = generateRow(data, hiddenColumns);
 
@@ -123,15 +125,14 @@ export const updateRow = (row, data, hiddenColumns) => {
 
 export const generateTable = ({ data, currentPage, rowsPerPage, hiddenColumns }) => {
   const tableElement = document.createElement('table');
+
   const thead = generateThead({ data, hiddenColumns }, tableElement);
-  // const filters = generateFilter(data);
+  const filters = generateFilter({ data, hiddenColumns }, tableElement);
   const tbody = generateTbody({ data, rowsPerPage, currentPage, hiddenColumns }, tableElement);
-  // const pagination = generateRow(data, rowsPerPage, currentPage);
 
   tableElement.appendChild(thead);
+  tableElement.appendChild(filters);
   tableElement.appendChild(tbody);
-  // tableElement.appendChild(filters);
-  // tableElement.appendChild(pagination);
 
   return tableElement;
 };
