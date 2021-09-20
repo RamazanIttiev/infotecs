@@ -22,7 +22,6 @@ export const initToggleColumns = ({ hiddenColumns }, callback) => {
       } else {
         newHiddenColumns.push(columnName);
       }
-
       callback(newHiddenColumns);
     });
   });
