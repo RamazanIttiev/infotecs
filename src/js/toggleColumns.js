@@ -1,17 +1,16 @@
 /**
- * Функция срывает или показыват выбранную колонку
  *
- * циклом проходимся по чекбоксам и вешаем обработку события клика на каждый чекбокс,
+ * @param {*} param0 hiddenColumns - массив в который будут помещаться ключи с скрытыми колнками
+ * @param {*} callback функция которая обновляет всю таблицу в завсимости от того, какие колонки есть в hiddenColumns
  *
- * Если в полях фильтрации было введено значение, то при переключении обнуляю его
- * (inputsValue[i].value = '')
+ * Массив hiddenColumns копируется и проверяется на наличие определенного столбца,
+ * если есть совпадения, то название колонки помещяется в массив newHiddenColumns,
+ * если нет, то newHiddenColumns фильтруется и остаются только те столбцы, которые уже есть в массиве
  *
- *
- * Далее, если значение инпута == hide, то получаю нужные ячейки по классам и скрваю их помощью класса hide
- * если нет, то убираю класс hide
+ * Далее мы передаем новый массив в колбэк который отрисовывает новую таблицу
  */
-export const initToggleColumns = ({ toggleColumns, hiddenColumns }, callback) => {
-  const checkboxElements = document.querySelectorAll(`${toggleColumns.selector} .check_box`);
+export const initToggleColumns = ({ hiddenColumns }, callback) => {
+  const checkboxElements = document.querySelectorAll('#toggleColumns .check_box');
   let newHiddenColumns = [...hiddenColumns];
 
   Array.from(checkboxElements).forEach(checkboxElement => {
@@ -27,30 +26,4 @@ export const initToggleColumns = ({ toggleColumns, hiddenColumns }, callback) =>
       callback(newHiddenColumns);
     });
   });
-
-  // for (let i = 0; i < checkboxes.length; i++) {
-  //   checkboxes[i].
-  //     for (let i = 0; i < inputsValue.length; i++) {
-  //       inputsValue[i].value = '';
-  //     }
-
-  //     const peopleTd = document.getElementsByClassName(e.target.id);
-
-  //     if (checkboxes[i].value === 'hide') {
-  //       for (let z = 0; z < peopleTd.length; z++) {
-  //         peopleTd[z].classList.add('hide');
-  //       }
-  //       document.getElementsByClassName(`${e.target.id}_head`)[0].classList.add('hide');
-  //       document.getElementsByClassName(`${e.target.id}_input`)[0].classList.add('hide');
-  //       checkboxes[i].value = 'show';
-  //     } else {
-  //       for (let z = 0; z < peopleTd.length; z++) {
-  //         peopleTd[z].classList.remove('hide');
-  //       }
-  //       document.getElementsByClassName(`${e.target.id}_head`)[0].classList.remove('hide');
-  //       document.getElementsByClassName(`${e.target.id}_input`)[0].classList.remove('hide');
-  //       checkboxes[i].value = 'hide';
-  //     }
-  //   });
-  // }
 };
